@@ -8,7 +8,7 @@ public class R {
     private String message;
     private Object data;
 
-    public static R success(Object data){
+    public static R success(Object data) {
         R r = new R();
         r.flag = true;
         r.message = "OK";
@@ -16,5 +16,17 @@ public class R {
         return r;
     }
 
-    //TODO 自行添加其他操作成功或失败的静态方法
+    public static R success(String msg) {
+        R r = new R();
+        r.flag = true;
+        r.message = msg;
+        return r;
+    }
+
+    public static R error(String msg) {
+        R r = new R();
+        r.flag = false;
+        r.message = msg;
+        return r;
+    }
 }

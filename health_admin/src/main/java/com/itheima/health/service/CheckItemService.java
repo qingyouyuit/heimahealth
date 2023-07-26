@@ -22,6 +22,12 @@ public class CheckItemService {
     @Autowired
     private CheckItemDao checkItemDao;
 
+    /**
+     * 功能描述: 检查项目列表
+     *
+     * @param pageParam
+     * @return : com.itheima.health.common.ResultPageData
+     */
     public ResultPageData findPage(PageParam pageParam) {
         Integer currentPage = pageParam.getCurrentPage();
         Integer pageSize = pageParam.getPageSize();
@@ -39,10 +45,26 @@ public class CheckItemService {
         return resultPageData;
     }
 
+    /**
+     * 功能描述: 新增检查项
+     *
+     * @param checkItemDto
+     * @return : void
+     */
     public void add(CheckItemDto checkItemDto) {
         CheckItem checkItem = new CheckItem();
         BeanUtils.copyProperties(checkItemDto, checkItem);
         log.info("checkItem:{}", checkItem);
         checkItemDao.insert(checkItem);
+    }
+
+    /**
+     * 功能描述: 根据id删除检查项
+     *
+     * @param id
+     * @return : void
+     */
+    public void delete(Integer id) {
+        checkItemDao.deleteById(id);
     }
 }

@@ -7,12 +7,10 @@ import com.itheima.health.common.ResultPageData;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.service.CheckItemService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -51,6 +49,18 @@ public class CheckItemController {
     public R chcheckitemAdd(@RequestBody CheckItemDto checkItemDto) {
         log.info("checkItemDto:{}", checkItemDto);
         checkItemService.add(checkItemDto);
-        return R.success("成功！");
+        return R.success("新增成功");
+    }
+
+    /**
+     * 功能描述: 检查项删除
+     *
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("/delete")
+    public R chcheckitemDelete(@RequestParam("id") Integer id) {
+        log.info("id:{}", id);
+        checkItemService.delete(id);
+        return R.success("删除成功");
     }
 }
