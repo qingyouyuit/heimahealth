@@ -9,6 +9,12 @@
         values (#{checkgroup_id}, #{checkitem_id})
     </insert>
 
+    <delete id="deleteCheckGroupAndCheckItemByCheckGroupId">
+        delete
+        from t_checkgroup_checkitem
+        where checkgroup_id = #{checkGroupId}
+    </delete>
+
     <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
         select checkitem_id
         from t_checkgroup_checkitem

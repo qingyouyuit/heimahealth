@@ -94,4 +94,20 @@ public class CheckGroupService {
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
+
+    /**
+     * 功能描述: 更新检查组
+     *
+     * @param checkGroup
+     * @param checkitemIds
+     * @return : void
+     */
+    public void updata(CheckGroup checkGroup, Integer[] checkitemIds) {
+        // 更新检查组
+        checkGroupDao.updateById(checkGroup);
+        // 删除检查组对应的检查项
+        checkGroupDao.deleteCheckGroupAndCheckItemByCheckGroupId(checkGroup.getId());
+        // 添加检查组对应的检查项
+        setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
+    }
 }

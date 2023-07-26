@@ -4,6 +4,7 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.model.pojos.CheckGroup;
+import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
 import lombok.Getter;
@@ -65,6 +66,20 @@ public class CheckGroupController {
     public R findById(@RequestParam Integer id) {
         CheckGroup checkGroup = checkGroupService.findById(id);
         return R.success("", checkGroup);
+    }
+
+    /**
+     * 功能描述: 查询所有检查项
+     *
+     * @param
+     * @return : com.itheima.health.common.R
+     */
+    @PostMapping("/edit")
+    public R updata(@RequestBody CheckGroup checkGroup, @RequestParam Integer[] checkitemIds) {
+        log.info("checkGroup:{}", checkGroup);
+        log.info("checkitemIds:{}", checkitemIds);
+        checkGroupService.updata(checkGroup, checkitemIds);
+        return R.success("编辑成功");
     }
 
 

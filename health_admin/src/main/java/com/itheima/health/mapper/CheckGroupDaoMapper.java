@@ -15,4 +15,6 @@ public interface CheckGroupDaoMapper extends BaseMapper<CheckGroup> {
     void setCheckGroupAndCheckItem(Map map);
 
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
+    void deleteCheckGroupAndCheckItemByCheckGroupId(Integer id);
 }

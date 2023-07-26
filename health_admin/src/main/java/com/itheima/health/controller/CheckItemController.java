@@ -108,7 +108,7 @@ public class CheckItemController {
     /**
      * 功能描述: 回显检查组对应的检查项
      *
-     * @param id
+     * @param checkgroupId
      * @return : com.itheima.health.common.R
      */
     @GetMapping("/findCheckItemIdsByCheckGroupId")
