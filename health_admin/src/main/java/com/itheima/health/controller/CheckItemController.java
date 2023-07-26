@@ -63,4 +63,16 @@ public class CheckItemController {
         checkItemService.delete(id);
         return R.success("删除成功");
     }
+
+    /**
+     * 功能描述: 检查项回显
+     *
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("/findById")
+    public R chcheckitemFindById(@RequestParam("id") Integer id) {
+        log.info("id:{}", id);
+        CheckItem checkItem = checkItemService.findById(id);
+        return R.success("查询成功", checkItem);
+    }
 }

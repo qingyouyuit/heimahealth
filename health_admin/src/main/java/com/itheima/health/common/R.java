@@ -8,10 +8,10 @@ public class R {
     private String message;
     private Object data;
 
-    public static R success(Object data) {
+    public static R success(String msg, Object data) {
         R r = new R();
         r.flag = true;
-        r.message = "OK";
+        r.message = msg;
         r.data = data;
         return r;
     }

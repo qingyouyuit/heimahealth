@@ -67,4 +67,14 @@ public class CheckItemService {
     public void delete(Integer id) {
         checkItemDao.deleteById(id);
     }
+
+    /**
+     * 功能描述: 根据id查询检查项，用于数据回显
+     *
+     * @param id
+     * @return : com.itheima.health.model.pojos.CheckItem
+     */
+    public CheckItem findById(Integer id) {
+        return checkItemDao.selectById(id);
+    }
 }
