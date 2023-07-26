@@ -1,5 +1,6 @@
 **/target/
 .idea
+.fastRequest
 *.iml
 *.class
 *Test.java
