@@ -6,6 +6,7 @@ import com.itheima.health.common.ResultPageData;
 import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,19 @@ public class CheckGroupController {
         checkGroupService.edit(checkGroup, checkitemIds);
         return R.success("编辑成功");
     }
+
+    /**
+     * 功能描述: 回显检查组
+     *
+     * @param id
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("/findById")
+    public R findById(@RequestParam Integer id) {
+        CheckGroup checkGroup = checkGroupService.findById(id);
+        return R.success("", checkGroup);
+    }
+
+
 }
 

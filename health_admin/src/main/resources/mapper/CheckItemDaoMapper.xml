@@ -9,4 +9,10 @@
         values (#{checkgroup_id}, #{checkitem_id})
     </insert>
 
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
+        select checkitem_id
+        from t_checkgroup_checkitem
+        where checkgroup_id = #{checkGroupId}
+    </select>
+
 </mapper>

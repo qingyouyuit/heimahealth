@@ -6,6 +6,7 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
+import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,8 @@ public class CheckItemController {
 
     @Autowired
     private CheckItemService checkItemService;
+    @Autowired
+    private CheckGroupService checkGroupService;
 
     /**
      * 功能描述: 检查项目列表
@@ -100,5 +103,17 @@ public class CheckItemController {
     public R findAll() {
         List<CheckItem> all = checkItemService.findAll();
         return R.success(all);
+    }
+
+    /**
+     * 功能描述: 回显检查组对应的检查项
+     *
+     * @param id
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("/findCheckItemIdsByCheckGroupId")
+    public R findCheckItemIdsByCheckGroupId(@RequestParam("checkgroupId") Integer checkgroupId) {
+        List<Integer> checkItemIds = checkGroupService.findCheckItemIdsByCheckGroupId(checkgroupId);
+        return R.success(checkItemIds);
     }
 }

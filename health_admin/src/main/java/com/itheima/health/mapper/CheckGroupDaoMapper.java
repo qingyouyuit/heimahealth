@@ -3,6 +3,7 @@ package com.itheima.health.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.itheima.health.model.pojos.CheckGroup;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,4 +13,6 @@ import java.util.Map;
  */
 public interface CheckGroupDaoMapper extends BaseMapper<CheckGroup> {
     void setCheckGroupAndCheckItem(Map map);
+
+    List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 }
