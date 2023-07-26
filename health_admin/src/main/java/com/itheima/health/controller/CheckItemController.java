@@ -75,4 +75,17 @@ public class CheckItemController {
         CheckItem checkItem = checkItemService.findById(id);
         return R.success("查询成功", checkItem);
     }
+
+    /**
+     * 功能描述: 检查项修改
+     *
+     * @return : com.itheima.health.common.R
+     */
+
+    @PostMapping("/edit")
+    public R chcheckitemEdit(@RequestBody CheckItem checkItem) {
+        log.info("checkItem:{}", checkItem);
+        checkItemService.updata(checkItem);
+        return R.success("修改成功");
+    }
 }

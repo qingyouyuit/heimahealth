@@ -77,4 +77,14 @@ public class CheckItemService {
     public CheckItem findById(Integer id) {
         return checkItemDao.selectById(id);
     }
+
+    /**
+     * 功能描述: 修改检查项
+     *
+     * @param checkItem
+     * @return : void
+     */
+    public void updata(CheckItem checkItem) {
+        checkItemDao.updateById(checkItem);
+    }
 }
