@@ -2,6 +2,8 @@ package com.itheima.health.common;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class R {
     private boolean flag;
@@ -15,6 +17,15 @@ public class R {
         r.data = data;
         return r;
     }
+
+    public static R success(Object data) {
+        R r = new R();
+        r.flag = true;
+        r.message = "OK";
+        r.data = data;
+        return r;
+    }
+
 
     public static R success(String msg) {
         R r = new R();

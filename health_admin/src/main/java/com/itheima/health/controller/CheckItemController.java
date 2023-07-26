@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequestMapping("/checkitem")
@@ -87,5 +89,16 @@ public class CheckItemController {
         log.info("checkItem:{}", checkItem);
         checkItemService.updata(checkItem);
         return R.success("修改成功");
+    }
+
+    /**
+     * 功能描述: 查询所有检查项
+     *
+     * @return : java.util.List<com.itheima.health.model.pojos.CheckItem>
+     */
+    @GetMapping("/findAll")
+    public R findAll() {
+        List<CheckItem> all = checkItemService.findAll();
+        return R.success(all);
     }
 }

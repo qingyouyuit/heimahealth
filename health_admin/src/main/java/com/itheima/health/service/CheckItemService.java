@@ -87,4 +87,14 @@ public class CheckItemService {
     public void updata(CheckItem checkItem) {
         checkItemDao.updateById(checkItem);
     }
+
+    /**
+     * 功能描述: 查询所有检查项
+     *
+     * @return : java.util.List<com.itheima.health.model.pojos.CheckItem>
+     */
+    public List<CheckItem> findAll() {
+        return checkItemDao.selectList(null);
+    }
+
 }
