@@ -110,4 +110,20 @@ public class CheckGroupService {
         // 添加检查组对应的检查项
         setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
     }
+
+    /**
+     * 功能描述: 删除检查组
+     *
+     * @param id
+     * @return : void
+     */
+    public boolean deleteById(Integer id) {
+        // 判断是否有检查项关联
+        if (checkGroupDao.findCheckItemIdsByCheckGroupId(id).size() > 0) {
+            return false;
+        }
+        // 删除检查组
+        checkGroupDao.deleteById(id);
+        return true;
+    }
 }

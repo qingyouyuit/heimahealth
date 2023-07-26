@@ -4,15 +4,12 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.model.pojos.CheckGroup;
-import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -82,6 +79,15 @@ public class CheckGroupController {
         return R.success("编辑成功");
     }
 
+    @GetMapping("deleteById")
+    public R deleteById(@RequestParam Integer id) {
+        boolean flag = checkGroupService.deleteById(id);
+        if (flag) {
+            return R.success("删除成功");
+        } else {
+            return R.error("已关联,无法删除");
+        }
 
+    }
 }
 
