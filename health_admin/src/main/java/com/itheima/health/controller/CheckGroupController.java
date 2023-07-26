@@ -1,12 +1,16 @@
 package com.itheima.health.controller;
 
 import com.itheima.health.common.PageParam;
+import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
+import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -35,5 +39,19 @@ public class CheckGroupController {
         return resultPageData;
     }
 
-
+    /**
+     * 功能描述: 新增检查组
+     *
+     * @param checkGroup
+     * @param checkitemIds
+     * @return : com.itheima.health.common.R
+     */
+    @PostMapping("/add")
+    public R edit(@RequestBody CheckGroup checkGroup, @RequestParam Integer[] checkitemIds) {
+        log.info("checkGroup:{}", checkGroup);
+        log.info("checkitemIds:{}", checkitemIds);
+        checkGroupService.edit(checkGroup, checkitemIds);
+        return R.success("编辑成功");
+    }
 }
+

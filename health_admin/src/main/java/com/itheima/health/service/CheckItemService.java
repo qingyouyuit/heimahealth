@@ -3,7 +3,7 @@ package com.itheima.health.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.itheima.health.mapper.CheckItemDao;
+import com.itheima.health.mapper.CheckItemDaoMapper;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
@@ -20,7 +20,7 @@ import java.util.List;
 public class CheckItemService {
 
     @Autowired
-    private CheckItemDao checkItemDao;
+    private CheckItemDaoMapper checkItemDao;
 
     /**
      * 功能描述: 检查项目列表

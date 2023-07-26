@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @MapperScan("com.itheima.health.mapper")
-public class HealthAdminApp {
+public class HealthAdminApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HealthAdminApp.class, args);
+        SpringApplication.run(HealthAdminApplication.class, args);
     }
 
 
