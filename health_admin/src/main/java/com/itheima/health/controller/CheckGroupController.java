@@ -3,10 +3,10 @@ package com.itheima.health.controller;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
+import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +50,7 @@ public class CheckGroupController {
         log.info("checkGroup:{}", checkGroup);
         log.info("checkitemIds:{}", checkitemIds);
         checkGroupService.edit(checkGroup, checkitemIds);
-        return R.success("编辑成功");
+        return R.success(MessageConstant.ADD_CHECKGROUP_SUCCESS);
     }
 
     /**
@@ -76,16 +76,16 @@ public class CheckGroupController {
         log.info("checkGroup:{}", checkGroup);
         log.info("checkitemIds:{}", checkitemIds);
         checkGroupService.updata(checkGroup, checkitemIds);
-        return R.success("编辑成功");
+        return R.success(MessageConstant.EDIT_CHECKGROUP_SUCCESS);
     }
 
     @GetMapping("deleteById")
     public R deleteById(@RequestParam Integer id) {
         boolean flag = checkGroupService.deleteById(id);
         if (flag) {
-            return R.success("删除成功");
+            return R.success(MessageConstant.DELETE_CHECKGROUP_SUCCESS);
         } else {
-            return R.error("已关联,无法删除");
+            return R.error(MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
 
     }

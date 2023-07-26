@@ -4,6 +4,7 @@ import com.itheima.health.common.R;
 import com.itheima.health.config.BeanContext;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
+import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.service.CheckGroupService;
@@ -54,7 +55,7 @@ public class CheckItemController {
     public R chcheckitemAdd(@RequestBody CheckItemDto checkItemDto) {
         log.info("checkItemDto:{}", checkItemDto);
         checkItemService.add(checkItemDto);
-        return R.success("新增成功");
+        return R.success(MessageConstant.ADD_CHECKITEM_SUCCESS);
     }
 
     /**
@@ -66,7 +67,7 @@ public class CheckItemController {
     public R chcheckitemDelete(@RequestParam("id") Integer id) {
         log.info("id:{}", id);
         checkItemService.delete(id);
-        return R.success("删除成功");
+        return R.success(MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
 
     /**
@@ -78,7 +79,7 @@ public class CheckItemController {
     public R chcheckitemFindById(@RequestParam("id") Integer id) {
         log.info("id:{}", id);
         CheckItem checkItem = checkItemService.findById(id);
-        return R.success("查询成功", checkItem);
+        return R.success(MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItem);
     }
 
     /**
@@ -91,7 +92,7 @@ public class CheckItemController {
     public R chcheckitemEdit(@RequestBody CheckItem checkItem) {
         log.info("checkItem:{}", checkItem);
         checkItemService.updata(checkItem);
-        return R.success("修改成功");
+        return R.success(MessageConstant.EDIT_CHECKITEM_SUCCESS);
     }
 
     /**
