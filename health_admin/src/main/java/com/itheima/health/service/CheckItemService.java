@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.health.mapper.CheckItemDaoMapper;
 import com.itheima.health.model.dtos.CheckItemDto;
-import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
