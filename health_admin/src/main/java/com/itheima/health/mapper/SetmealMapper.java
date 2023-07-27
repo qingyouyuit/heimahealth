@@ -16,12 +16,12 @@ public interface SetmealMapper extends BaseMapper<Setmeal> {
     void setSetmealAndCheckGroup(HashMap<String, Integer> hashMap);
 
     /**
-     * 功能描述: 根据套餐id删除套餐与检查组的关系
+     * 功能描述: 根据套餐id查询检查组id
      *
-     * @param checkgroupId
+     * @param setmealId
      * @return : java.util.List<java.lang.Integer>
      */
-    List<Integer> findCheckItemIdsByCheckGroupId(Integer setmealId);
+    List<Integer> findSetmeaIdByCheckGroupId(Integer setmealId);
 
     /**
      * 功能描述: 根据套餐id删除套餐与检查组的关系

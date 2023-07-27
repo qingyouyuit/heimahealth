@@ -126,6 +126,12 @@ public class CheckGroupController {
 
     }
 
+    /**
+     * 功能描述:  根据套餐id查询检查组id
+     *
+     * @param setmealId
+     * @return : com.itheima.health.common.R
+     */
     @GetMapping("/findCheckGroupIdBysetmealId")
     public R findCheckGroupIdBysetmealId(@RequestParam("setmealId") Integer setmealId) {
         List<Integer> checkGroupId = setmealService.findCheckGroupIdBysetmealId(setmealId);

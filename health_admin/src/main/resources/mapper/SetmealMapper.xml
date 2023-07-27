@@ -14,7 +14,7 @@
         where setmeal_id = #{setmealId}
     </delete>
 
-    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer"
+    <select id="findSetmeaIdByCheckGroupId" resultType="java.lang.Integer"
             parameterType="java.lang.Integer">
         select checkgroup_id
         from t_setmeal_checkgroup

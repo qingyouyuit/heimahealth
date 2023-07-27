@@ -81,18 +81,23 @@ public class SetmealController {
         }
     }
 
+    /**
+     * 功能描述: 回显所有套餐数据
+     *
+     * @return : com.itheima.health.common.R
+     */
     @GetMapping("/findAll")
     public R findAllCheckGroup() {
         try {
             List<Setmeal> setmealList = setmealService.findAll();
-            return R.success(MessageConstant.QUERY_CHECKGROUP_SUCCESS, setmealList);
+            return R.success(MessageConstant.QUERY_SETMEAL_SUCCESS, setmealList);
         } catch (Exception e) {
-            return R.success(MessageConstant.QUERY_CHECKGROUP_FAIL);
+            return R.success(MessageConstant.QUERY_SETMEAL_FAIL);
         }
     }
 
     /**
-     * 功能描述: 回显套餐数据
+     * 功能描述: 通过id回显套餐数据
      *
      * @param id
      * @return : com.itheima.health.model.pojos.CheckGroup
@@ -107,13 +112,36 @@ public class SetmealController {
         }
     }
 
+    /**
+     * 功能描述: 修改套餐
+     *
+     * @param setmeal
+     * @param checkgroupIds
+     * @return : com.itheima.health.common.R
+     */
     @PostMapping("/edit")
     public R updata(@RequestBody Setmeal setmeal, @RequestParam Integer[] checkgroupIds) {
         try {
             setmealService.updata(setmeal, checkgroupIds);
-            return R.success(MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+            return R.success(MessageConstant.EDIT_SETMEAL_SUCCESS);
         } catch (Exception e) {
-            return R.error(MessageConstant.EDIT_CHECKGROUP_FAIL);
+            return R.error(MessageConstant.EDIT_SETMEAL_FAIL);
+        }
+    }
+
+    /**
+     * 功能描述: 删除套餐
+     *
+     * @param id
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("deleteById")
+    public R deleteById(@RequestParam Integer id) {
+        boolean flag = setmealService.deleteById(id);
+        if (flag) {
+            return R.success(MessageConstant.DELETE_CHECKGROUP_SUCCESS);
+        } else {
+            return R.error(MessageConstant.DELETE_SETMEAL_FAIL);
         }
     }
 }

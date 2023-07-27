@@ -107,7 +107,7 @@ public class SetmealService {
      * @return : java.util.List<java.lang.Integer>
      */
     public List<Integer> findCheckGroupIdBysetmealId(Integer setmealId) {
-        return setmealMapper.findCheckItemIdsByCheckGroupId(setmealId);
+        return setmealMapper.findSetmeaIdByCheckGroupId(setmealId);
     }
 
     /**
@@ -123,5 +123,21 @@ public class SetmealService {
         setmealMapper.deleteCheckGroupAndCheckItemByCheckGroupId(setmeal.getId());
         // 添加检查组对应的检查项
         setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
+    }
+
+    /**
+     * 功能描述: 删除套餐
+     *
+     * @param id
+     * @return : boolean
+     */
+    public boolean deleteById(Integer id) {
+        // 判断是否有检查项关联
+        if (setmealMapper.findSetmeaIdByCheckGroupId(id).size() > 0) {
+            return false;
+        }
+        // 删除检查组
+        setmealMapper.deleteById(id);
+        return true;
     }
 }
