@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -61,6 +62,13 @@ public class SetmealService {
         setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
     }
 
+    /**
+     * 功能描述: 添加套餐和检查组的关系
+     *
+     * @param id
+     * @param checkgroupIds
+     * @return : void
+     */
     private void setSetmealAndCheckGroup(Integer id, Integer[] checkgroupIds) {
         if (checkgroupIds != null && checkgroupIds.length > 0) {
             for (Integer checkgroupId : checkgroupIds) {
@@ -72,5 +80,23 @@ public class SetmealService {
         }
     }
 
+    /**
+     * 功能描述: 查询所有套餐
+     *
+     * @return : java.util.List<com.itheima.health.model.pojos.Setmeal>
+     */
+    public List<Setmeal> findAll() {
+        return setmealMapper.selectList(null);
+    }
 
+
+    /**
+     * 功能描述: 根据id查询套餐
+     *
+     * @param id
+     * @return : com.itheima.health.model.pojos.Setmeal
+     */
+    public Setmeal findById(Integer id) {
+        return setmealMapper.selectById(id);
+    }
 }

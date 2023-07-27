@@ -5,6 +5,7 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
+import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.Setmeal;
 import com.itheima.health.service.impl.SetmealService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -79,4 +81,29 @@ public class SetmealController {
         }
     }
 
+    @GetMapping("/findAll")
+    public R findAllCheckGroup() {
+        try {
+            List<Setmeal> setmealList = setmealService.findAll();
+            return R.success(MessageConstant.QUERY_CHECKGROUP_SUCCESS, setmealList);
+        } catch (Exception e) {
+            return R.success(MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
+    /**
+     * 功能描述: 回显套餐数据
+     *
+     * @param id
+     * @return : com.itheima.health.model.pojos.CheckGroup
+     */
+    @GetMapping("/findById")
+    public R findById(@RequestParam Integer id) {
+        try {
+            Setmeal setmeal = setmealService.findById(id);
+            return R.success(MessageConstant.QUERY_SETMEAL_SUCCESS, setmeal);
+        } catch (Exception e) {
+            return R.error(MessageConstant.QUERY_SETMEAL_FAIL);
+        }
+    }
 }

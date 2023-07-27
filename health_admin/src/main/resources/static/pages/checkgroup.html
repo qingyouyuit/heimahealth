@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -30,7 +31,8 @@
             flex: 1 1 0%;
         }
 
-        .datatable td, .datatable th {
+        .datatable td,
+        .datatable th {
             padding: 12px 0;
             min-width: 0;
             -webkit-box-sizing: border-box;
@@ -42,6 +44,7 @@
         }
     </style>
 </head>
+
 <body class="hold-transition">
     <div id="app">
         <div class="content-header">
@@ -79,13 +82,9 @@
                     </el-table-column>
                 </el-table>
                 <div class="pagination-container">
-                    <el-pagination
-                            class="pagiantion"
-                            @current-change="handleCurrentChange"
-                            :current-page="pagination.currentPage"
-                            :page-size="pagination.pageSize"
-                            layout="total, prev, pager, next, jumper"
-                            :total="pagination.total">
+                    <el-pagination class="pagiantion" @current-change="handleCurrentChange"
+                                   :current-page="pagination.currentPage" :page-size="pagination.pageSize"
+                                   layout="total, prev, pager, next, jumper" :total="pagination.total">
                     </el-pagination>
                 </div>
                 <!-- 新增标签弹层 -->
@@ -442,4 +441,5 @@
         }
     });
 </script>
+
 </html>
