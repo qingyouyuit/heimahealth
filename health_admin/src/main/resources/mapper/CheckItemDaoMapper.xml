@@ -23,4 +23,12 @@
         where checkgroup_id = #{checkGroupId}
     </select>
 
+    <!-- 根据检查项id查询其所有的检查组 -->
+    <select id="findCheckGroupIdsByCheckItemId" resultType="java.lang.Integer"
+            parameterType="java.lang.Integer">
+        select checkgroup_id
+        from t_checkgroup_checkitem
+        where checkitem_id = #{checkitemId}
+    </select>
+
 </mapper>

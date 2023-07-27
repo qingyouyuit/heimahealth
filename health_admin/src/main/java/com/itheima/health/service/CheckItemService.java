@@ -3,8 +3,11 @@ package com.itheima.health.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.itheima.health.constant.MessageConstant;
+import com.itheima.health.mapper.CheckGroupDaoMapper;
 import com.itheima.health.mapper.CheckItemDaoMapper;
 import com.itheima.health.model.dtos.CheckItemDto;
+import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
@@ -22,6 +25,8 @@ public class CheckItemService {
 
     @Autowired
     private CheckItemDaoMapper checkItemDao;
+    @Autowired
+    private CheckGroupDaoMapper checkGroupDaoMapper;
 
     /**
      * 功能描述: 检查项目列表
@@ -74,6 +79,9 @@ public class CheckItemService {
      * @return : void
      */
     public void delete(Integer id) {
+        if (checkGroupDaoMapper.findCheckGroupIdsByCheckItemId(id).size() > 0) {
+            throw new RuntimeException(MessageConstant.DELETE_CHECKITEM_FAIL);
+        }
         checkItemDao.deleteById(id);
     }
 

@@ -23,16 +23,24 @@ public interface CheckGroupDaoMapper extends BaseMapper<CheckGroup> {
     /**
      * 功能描述:根据检查组id查找其所有的检查项id
      *
-     * @param id
+     * @param checkGroupId
      * @return : java.util.List<java.lang.Integer>
      */
-    List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+    List<Integer> findCheckItemIdsByCheckGroupId(Integer checkGroupId);
 
     /**
      * 功能描述: 根据检查组id删除其对应的检查项id
      *
-     * @param id
+     * @param checkGroupId
      * @return : void
      */
-    void deleteCheckGroupAndCheckItemByCheckGroupId(Integer id);
+    void deleteCheckGroupAndCheckItemByCheckGroupId(Integer checkGroupId);
+
+    /**
+     * 功能描述:根据检查项id查找其所有的检查组id
+     *
+     * @param checkitemId
+     * @return : java.util.List<java.lang.Integer>
+     */
+    List<Integer> findCheckGroupIdsByCheckItemId(Integer checkitemId);
 }
