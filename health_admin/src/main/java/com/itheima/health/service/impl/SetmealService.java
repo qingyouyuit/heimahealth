@@ -1,18 +1,17 @@
 package com.itheima.health.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.mapper.SetmealMapper;
-import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.Setmeal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
 
 @Service
 @Slf4j
@@ -49,4 +48,29 @@ public class SetmealService {
         resultPageData.setTotal(page.getTotal());
         return resultPageData;
     }
+
+    /**
+     * 功能描述: 添加套餐
+     *
+     * @param setmeal
+     * @param checkgroupIds
+     * @return : void
+     */
+    public void addSetmeal(Setmeal setmeal, Integer[] checkgroupIds) {
+        setmealMapper.insert(setmeal);
+        setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
+    }
+
+    private void setSetmealAndCheckGroup(Integer id, Integer[] checkgroupIds) {
+        if (checkgroupIds != null && checkgroupIds.length > 0) {
+            for (Integer checkgroupId : checkgroupIds) {
+                HashMap<String, Integer> hashMap = new HashMap<>();
+                hashMap.put("setmeal_id", id);
+                hashMap.put("checkgroup_id", checkgroupId);
+                setmealMapper.setSetmealAndCheckGroup(hashMap);
+            }
+        }
+    }
+
+
 }

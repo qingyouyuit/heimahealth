@@ -5,13 +5,11 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
+import com.itheima.health.model.pojos.Setmeal;
 import com.itheima.health.service.impl.SetmealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -61,6 +59,23 @@ public class SetmealController {
             return R.success(MessageConstant.PIC_UPLOAD_SUCCESS, url);
         } catch (IOException e) {
             return R.error(MessageConstant.PIC_UPLOAD_FAIL);
+        }
+    }
+
+    /**
+     * 功能描述: 添加套餐
+     *
+     * @param setmeal
+     * @param checkgroupIds
+     * @return : com.itheima.health.common.R
+     */
+    @PostMapping("/add")
+    public R addSetmeal(@RequestBody Setmeal setmeal, @RequestParam Integer[] checkgroupIds) {
+        try {
+            setmealService.addSetmeal(setmeal, checkgroupIds);
+            return R.success(MessageConstant.ADD_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.ADD_SETMEAL_FAIL);
         }
     }
 
