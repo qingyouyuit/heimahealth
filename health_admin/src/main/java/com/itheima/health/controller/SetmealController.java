@@ -106,4 +106,14 @@ public class SetmealController {
             return R.error(MessageConstant.QUERY_SETMEAL_FAIL);
         }
     }
+
+    @PostMapping("/edit")
+    public R updata(@RequestBody Setmeal setmeal, @RequestParam Integer[] checkgroupIds) {
+        try {
+            setmealService.updata(setmeal, checkgroupIds);
+            return R.success(MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.EDIT_CHECKGROUP_FAIL);
+        }
+    }
 }

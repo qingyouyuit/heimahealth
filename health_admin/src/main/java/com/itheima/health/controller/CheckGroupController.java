@@ -77,7 +77,7 @@ public class CheckGroupController {
     }
 
     /**
-     * 功能描述: 查询所有检查项
+     * 功能描述: 更新所有检查项
      *
      * @param
      * @return : com.itheima.health.common.R

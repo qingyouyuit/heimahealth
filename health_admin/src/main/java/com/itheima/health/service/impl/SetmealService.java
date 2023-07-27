@@ -101,12 +101,27 @@ public class SetmealService {
     }
 
     /**
-     * 功能描述:
+     * 功能描述: 根据套餐id查询检查组id
      *
      * @param setmealId
      * @return : java.util.List<java.lang.Integer>
      */
     public List<Integer> findCheckGroupIdBysetmealId(Integer setmealId) {
         return setmealMapper.findCheckItemIdsByCheckGroupId(setmealId);
+    }
+
+    /**
+     * 功能描述: 修改套餐
+     *
+     * @param setmeal
+     * @param checkgroupIds
+     * @return : void
+     */
+    public void updata(Setmeal setmeal, Integer[] checkgroupIds) {
+        setmealMapper.updateById(setmeal);
+        // 删除检查组对应的检查项
+        setmealMapper.deleteCheckGroupAndCheckItemByCheckGroupId(setmeal.getId());
+        // 添加检查组对应的检查项
+        setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
     }
 }

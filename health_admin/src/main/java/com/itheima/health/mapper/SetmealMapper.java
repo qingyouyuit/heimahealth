@@ -22,4 +22,12 @@ public interface SetmealMapper extends BaseMapper<Setmeal> {
      * @return : java.util.List<java.lang.Integer>
      */
     List<Integer> findCheckItemIdsByCheckGroupId(Integer setmealId);
+
+    /**
+     * 功能描述: 根据套餐id删除套餐与检查组的关系
+     *
+     * @param id
+     * @return : void
+     */
+    void deleteCheckGroupAndCheckItemByCheckGroupId(Integer id);
 }

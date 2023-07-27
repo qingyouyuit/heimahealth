@@ -8,6 +8,12 @@
         values (#{setmeal_id}, #{checkgroup_id})
     </insert>
 
+    <delete id="deleteCheckGroupAndCheckItemByCheckGroupId" parameterType="java.lang.Integer">
+        delete
+        from t_setmeal_checkgroup
+        where setmeal_id = #{setmealId}
+    </delete>
+
     <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer"
             parameterType="java.lang.Integer">
         select checkgroup_id
