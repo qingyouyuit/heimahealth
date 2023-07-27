@@ -7,6 +7,7 @@ import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.impl.CheckGroupService;
 import com.itheima.health.service.impl.CheckItemService;
+import com.itheima.health.service.impl.SetmealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class CheckGroupController {
     @Autowired
     private CheckGroupService checkGroupService;
     @Autowired
-    private CheckItemService checkItemService;
+    private SetmealService setmealService;
 
     /**
      * 功能描述: 检查组列表
@@ -123,6 +124,12 @@ public class CheckGroupController {
             return R.success(MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
 
+    }
+
+    @GetMapping("/findCheckGroupIdBysetmealId")
+    public R findCheckGroupIdBysetmealId(@RequestParam("setmealId") Integer setmealId) {
+        List<Integer> checkGroupId = setmealService.findCheckGroupIdBysetmealId(setmealId);
+        return R.success(checkGroupId);
     }
 }
 

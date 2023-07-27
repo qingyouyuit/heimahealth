@@ -99,4 +99,14 @@ public class SetmealService {
     public Setmeal findById(Integer id) {
         return setmealMapper.selectById(id);
     }
+
+    /**
+     * 功能描述:
+     *
+     * @param setmealId
+     * @return : java.util.List<java.lang.Integer>
+     */
+    public List<Integer> findCheckGroupIdBysetmealId(Integer setmealId) {
+        return setmealMapper.findCheckItemIdsByCheckGroupId(setmealId);
+    }
 }

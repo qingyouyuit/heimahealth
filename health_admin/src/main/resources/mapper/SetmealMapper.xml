@@ -7,4 +7,11 @@
         insert into t_setmeal_checkgroup(setmeal_id, checkgroup_id)
         values (#{setmeal_id}, #{checkgroup_id})
     </insert>
+
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer"
+            parameterType="java.lang.Integer">
+        select checkgroup_id
+        from t_setmeal_checkgroup
+        where setmeal_id = #{setmealId};
+    </select>
 </mapper>
