@@ -9,7 +9,6 @@ import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.service.CheckGroupService;
 import com.itheima.health.service.CheckItemService;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ import java.util.List;
 public class CheckItemController {
     @Autowired
     private BeanContext beanContext;
+
     @Autowired
     private CheckItemService checkItemService;
     @Autowired
@@ -52,7 +52,7 @@ public class CheckItemController {
             checkItemService.add(checkItemDto);
             return R.success(MessageConstant.ADD_CHECKITEM_SUCCESS);
         } catch (Exception e) {
-            return R.error(MessageConstant.ADD_CHECKITEM_FAIL)
+            return R.error(MessageConstant.ADD_CHECKITEM_FAIL);
         }
     }
 

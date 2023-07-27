@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.health.mapper.CheckItemDaoMapper;
 import com.itheima.health.model.dtos.CheckItemDto;
+import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -34,6 +36,14 @@ public class CheckItemService {
         IPage<CheckItem> page = new Page<>(currentPage, pageSize);
 
         LambdaQueryWrapper<CheckItem> query = new LambdaQueryWrapper<>();
+        if (!StringUtils.isEmpty(pageParam.getQueryString())) {
+            // 使用正则表达式判断是否为数字
+            if (pageParam.getQueryString().matches("^[0-9]*$")) {
+                query.like(CheckItem::getCode, pageParam.getQueryString());
+            } else {
+                query.likeRight(CheckItem::getName, pageParam.getQueryString());
+            }
+        }
 
         IPage<CheckItem> pageData = checkItemDao.selectPage(page, query);
         long total = pageData.getTotal();

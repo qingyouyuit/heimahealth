@@ -10,6 +10,7 @@ import com.itheima.health.model.pojos.CheckGroup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,19 @@ public class CheckGroupService {
         IPage<CheckGroup> page = new Page<>(currentPage, pageSize);
 
         LambdaQueryWrapper<CheckGroup> query = new LambdaQueryWrapper<>();
+        // 判断是否有查询条件,isNotEmpty()判断字符串是否不为空,不为空返回true
+        if (!StringUtils.isEmpty(pageParam.getQueryString())) {
+            // 使用正则表达式判断是否为数字
+            if (pageParam.getQueryString().matches("^[0-9]*$")) {
+                query.like(CheckGroup::getCode, pageParam.getQueryString());
+                // 使用正则表达式判断是否为大写字母
+            } else if (pageParam.getQueryString().matches("^[A-Z]*$")) {
+                query.like(CheckGroup::getHelpCode, pageParam.getQueryString());
+                // 其余情况模糊查询
+            } else {
+                query.like(CheckGroup::getName, pageParam.getQueryString());
+            }
+        }
 
         IPage<CheckGroup> pageData = checkGroupDao.selectPage(page, query);
         long total = pageData.getTotal();
