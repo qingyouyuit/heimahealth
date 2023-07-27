@@ -49,8 +49,12 @@ public class CheckGroupController {
     public R edit(@RequestBody CheckGroup checkGroup, @RequestParam Integer[] checkitemIds) {
         log.info("checkGroup:{}", checkGroup);
         log.info("checkitemIds:{}", checkitemIds);
-        checkGroupService.edit(checkGroup, checkitemIds);
-        return R.success(MessageConstant.ADD_CHECKGROUP_SUCCESS);
+        try {
+            checkGroupService.edit(checkGroup, checkitemIds);
+            return R.success(MessageConstant.ADD_CHECKGROUP_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.ADD_CHECKGROUP_FAIL);
+        }
     }
 
     /**
@@ -61,8 +65,12 @@ public class CheckGroupController {
      */
     @GetMapping("/findById")
     public R findById(@RequestParam Integer id) {
-        CheckGroup checkGroup = checkGroupService.findById(id);
-        return R.success("", checkGroup);
+        try {
+            CheckGroup checkGroup = checkGroupService.findById(id);
+            return R.success(MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
+        } catch (Exception e) {
+            return R.error(MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
     }
 
     /**
@@ -75,10 +83,20 @@ public class CheckGroupController {
     public R updata(@RequestBody CheckGroup checkGroup, @RequestParam Integer[] checkitemIds) {
         log.info("checkGroup:{}", checkGroup);
         log.info("checkitemIds:{}", checkitemIds);
-        checkGroupService.updata(checkGroup, checkitemIds);
-        return R.success(MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+        try {
+            checkGroupService.updata(checkGroup, checkitemIds);
+            return R.success(MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.EDIT_CHECKGROUP_FAIL);
+        }
     }
 
+    /**
+     * 功能描述: 根据id删除检查组，如果有检查组与检查项关联，无法删除
+     *
+     * @param id
+     * @return : com.itheima.health.common.R
+     */
     @GetMapping("deleteById")
     public R deleteById(@RequestParam Integer id) {
         boolean flag = checkGroupService.deleteById(id);

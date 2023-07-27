@@ -22,7 +22,6 @@ import java.util.List;
 public class CheckItemController {
     @Autowired
     private BeanContext beanContext;
-
     @Autowired
     private CheckItemService checkItemService;
     @Autowired
@@ -37,11 +36,6 @@ public class CheckItemController {
 
     @PostMapping("/findPage")
     public ResultPageData findPage(@RequestBody PageParam pageParam) {
-        // System.out.println(pageParam);
-        //模拟数据
-//        ResultPageData resultPageData = new ResultPageData();
-//        resultPageData.setTotal(45);
-//        resultPageData.setRows(new ArrayList());
         ResultPageData resultPageData = checkItemService.findPage(pageParam);
         return resultPageData;
     }
@@ -54,8 +48,12 @@ public class CheckItemController {
     @PostMapping("/add")
     public R chcheckitemAdd(@RequestBody CheckItemDto checkItemDto) {
         log.info("checkItemDto:{}", checkItemDto);
-        checkItemService.add(checkItemDto);
-        return R.success(MessageConstant.ADD_CHECKITEM_SUCCESS);
+        try {
+            checkItemService.add(checkItemDto);
+            return R.success(MessageConstant.ADD_CHECKITEM_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.ADD_CHECKITEM_FAIL)
+        }
     }
 
     /**
@@ -66,8 +64,12 @@ public class CheckItemController {
     @GetMapping("/delete")
     public R chcheckitemDelete(@RequestParam("id") Integer id) {
         log.info("id:{}", id);
-        checkItemService.delete(id);
-        return R.success(MessageConstant.DELETE_CHECKITEM_SUCCESS);
+        try {
+            checkItemService.delete(id);
+            return R.success(MessageConstant.DELETE_CHECKITEM_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.DELETE_CHECKITEM_FAIL);
+        }
     }
 
     /**
@@ -78,8 +80,12 @@ public class CheckItemController {
     @GetMapping("/findById")
     public R chcheckitemFindById(@RequestParam("id") Integer id) {
         log.info("id:{}", id);
-        CheckItem checkItem = checkItemService.findById(id);
-        return R.success(MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItem);
+        try {
+            CheckItem checkItem = checkItemService.findById(id);
+            return R.success(MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItem);
+        } catch (Exception e) {
+            return R.error(MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
     }
 
     /**
@@ -91,8 +97,12 @@ public class CheckItemController {
     @PostMapping("/edit")
     public R chcheckitemEdit(@RequestBody CheckItem checkItem) {
         log.info("checkItem:{}", checkItem);
-        checkItemService.updata(checkItem);
-        return R.success(MessageConstant.EDIT_CHECKITEM_SUCCESS);
+        try {
+            checkItemService.updata(checkItem);
+            return R.success(MessageConstant.EDIT_CHECKITEM_SUCCESS);
+        } catch (Exception e) {
+            return R.error(MessageConstant.EDIT_CHECKITEM_FAIL);
+        }
     }
 
     /**

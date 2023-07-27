@@ -52,7 +52,7 @@ public class CheckGroupService {
     }
 
     /**
-     * 功能描述:
+     * 功能描述: 添加检查组
      *
      * @param checkGroup
      * @param checkitemIds
@@ -64,6 +64,13 @@ public class CheckGroupService {
         setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
     }
 
+    /**
+     * 功能描述: 将检查组与检查项建立联系
+     *
+     * @param checkGroupId
+     * @param checkitemIds
+     * @return : void
+     */
     public void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkitemIds) {
         if (checkitemIds != null && checkitemIds.length > 0) {
             for (Integer checkitemId : checkitemIds) {

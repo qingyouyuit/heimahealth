@@ -3,18 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itheima.health.mapper.CheckGroupDaoMapper">
 
-    <!--设置检查组和检查项的关联关系-->
+    <!-- 设置检查组和检查项的关联关系 -->
     <insert id="setCheckGroupAndCheckItem" parameterType="hashmap">
         insert into t_checkgroup_checkitem(checkgroup_id, checkitem_id)
         values (#{checkgroup_id}, #{checkitem_id})
     </insert>
 
+    <!-- 根据检查组的id查询关联关系 -->
     <delete id="deleteCheckGroupAndCheckItemByCheckGroupId">
         delete
         from t_checkgroup_checkitem
         where checkgroup_id = #{checkGroupId}
     </delete>
 
+    <!-- 根据检查组id查询其所有的检查项 -->
     <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
         select checkitem_id
         from t_checkgroup_checkitem
