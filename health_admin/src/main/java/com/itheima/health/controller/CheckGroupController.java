@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @Auth: qingyouyu
@@ -104,6 +106,21 @@ public class CheckGroupController {
             return R.success(MessageConstant.DELETE_CHECKGROUP_SUCCESS);
         } else {
             return R.error(MessageConstant.DELETE_CHECKGROUP_FAIL);
+        }
+    }
+
+    /**
+     * 功能描述: 查询所有的检查组并返回
+     *
+     * @return : com.itheima.health.common.R
+     */
+    @GetMapping("/findAll")
+    public R findAllCheckGroup() {
+        try {
+            List<CheckGroup> checkGroupList = checkGroupService.findAll();
+            return R.success(MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroupList);
+        } catch (Exception e) {
+            return R.success(MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
 
     }

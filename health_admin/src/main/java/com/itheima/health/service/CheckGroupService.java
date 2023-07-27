@@ -147,4 +147,13 @@ public class CheckGroupService {
         checkGroupDao.deleteById(id);
         return true;
     }
+
+    /**
+     * 功能描述: 返回所有数据
+     *
+     * @return : java.util.List<com.itheima.health.model.pojos.CheckGroup>
+     */
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.selectList(null);
+    }
 }

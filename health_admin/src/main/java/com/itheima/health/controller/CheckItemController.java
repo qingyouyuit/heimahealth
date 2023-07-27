@@ -112,8 +112,8 @@ public class CheckItemController {
      */
     @GetMapping("/findAll")
     public R findAll() {
-        List<CheckItem> all = checkItemService.findAll();
-        return R.success(all);
+        List<CheckItem> checkItemList = checkItemService.findAll();
+        return R.success(checkItemList);
     }
 
     /**
