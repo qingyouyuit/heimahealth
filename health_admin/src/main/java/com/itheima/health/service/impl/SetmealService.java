@@ -1,4 +1,4 @@
-package com.itheima.health.service;
+package com.itheima.health.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

@@ -2,7 +2,7 @@ package com.itheima.health.controller;
 
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
-import com.itheima.health.service.SetmealService;
+import com.itheima.health.service.impl.SetmealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -16,5 +16,8 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 minio:
-  host: http://127.0.0.1:9000/
+  accessKey: minio
+  secretKey: minio123
   bucket: health
+  endpoint: http://192.168.200.131:9000
+  readPath: http://192.168.200.131:9000

@@ -13,6 +13,7 @@
         <module>health_admin</module>
         <module>health_app</module>
         <module>health_domain</module>
+        <module>heima-file-starter</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -25,7 +26,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- 依赖包版本管理 -->
-<!--        <spring-boot.version>2.1.18.RELEASE</spring-boot.version>-->
+        <!--        <spring-boot.version>2.1.18.RELEASE</spring-boot.version>-->
         <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
         <commons.io.version>2.6</commons.io.version>
         <commons.codec.version>1.12</commons.codec.version>
@@ -153,5 +154,5 @@
             <version>${junit.version}</version>
         </dependency>
     </dependencies>
-    
+
 </project>
