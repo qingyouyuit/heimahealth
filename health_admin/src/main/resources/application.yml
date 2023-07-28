@@ -15,6 +15,15 @@ mybatis-plus:
     map-underscore-to-camel-case: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8888/xxl-job-admin
+    executor:
+      appname: xxl-job-executor-sample
+      port: 9999
+
+
 minio:
   accessKey: minio
   secretKey: minio123

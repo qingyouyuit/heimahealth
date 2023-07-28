@@ -6,7 +6,6 @@ import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.impl.CheckGroupService;
-import com.itheima.health.service.impl.CheckItemService;
 import com.itheima.health.service.impl.SetmealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
