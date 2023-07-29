@@ -7,8 +7,8 @@ import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
-import com.itheima.health.service.impl.CheckGroupServiceImpl;
-import com.itheima.health.service.impl.CheckItemServiceImpl;
+import com.itheima.health.service.CheckGroupService;
+import com.itheima.health.service.CheckItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +23,9 @@ public class CheckItemController {
     private BeanContext beanContext;
 
     @Autowired
-    private CheckItemServiceImpl checkItemService;
+    private CheckItemService checkItemService;
     @Autowired
-    private CheckGroupServiceImpl checkGroupService;
+    private CheckGroupService checkGroupService;
 
     /**
      * 功能描述: 检查项目列表
