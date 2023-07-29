@@ -2,6 +2,7 @@ package com.itheima.health.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.itheima.health.model.pojos.CheckGroup;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
  * @Desc: 检查组的Mapper层
  * @Date: 2023/7/26 21:41
  */
+@Mapper
 public interface CheckGroupDaoMapper extends BaseMapper<CheckGroup> {
     /**
      * 功能描述: 将检查组id与检查项id添加进中间表

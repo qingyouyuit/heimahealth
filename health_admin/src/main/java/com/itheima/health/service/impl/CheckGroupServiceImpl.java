@@ -3,10 +3,12 @@ package com.itheima.health.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.mapper.CheckGroupDaoMapper;
 import com.itheima.health.model.pojos.CheckGroup;
+import com.itheima.health.service.CheckGroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class CheckGroupService {
+public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, CheckGroup> implements CheckGroupService {
     public static final String CHECKGROUP_ID = "checkgroup_id";
     public static final String CHECKITEM_ID = "checkitem_id";
     @Autowired
@@ -35,6 +37,7 @@ public class CheckGroupService {
      * @param pageParam
      * @return : com.itheima.health.common.ResultPageData
      */
+    @Override
     public ResultPageData findPage(PageParam pageParam) {
         Integer currentPage = pageParam.getCurrentPage();
         Integer pageSize = pageParam.getPageSize();
@@ -72,36 +75,19 @@ public class CheckGroupService {
      * @param checkitemIds
      * @return : void
      */
+    @Override
     public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
         // 添加并返回主键
         checkGroupDao.insert(checkGroup);
         setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
     }
-
-    /**
-     * 功能描述: 将检查组与检查项建立联系
-     *
-     * @param checkGroupId
-     * @param checkitemIds
-     * @return : void
-     */
-    public void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkitemIds) {
-        if (checkitemIds != null && checkitemIds.length > 0) {
-            for (Integer checkitemId : checkitemIds) {
-                Map<String, Integer> map = new HashMap<>();
-                map.put(CHECKGROUP_ID, checkGroupId);
-                map.put(CHECKITEM_ID, checkitemId);
-                checkGroupDao.setCheckGroupAndCheckItem(map);
-            }
-        }
-    }
-
     /**
      * 功能描述: 回显检查组
      *
      * @param id
      * @return : com.itheima.health.model.pojos.CheckGroup
      */
+    @Override
     public CheckGroup findById(Integer id) {
         return checkGroupDao.selectById(id);
     }
@@ -112,6 +98,7 @@ public class CheckGroupService {
      * @param id
      * @return : java.util.List<java.lang.Integer>
      */
+    @Override
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
         return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
     }
@@ -123,6 +110,7 @@ public class CheckGroupService {
      * @param checkitemIds
      * @return : void
      */
+    @Override
     public void updata(CheckGroup checkGroup, Integer[] checkitemIds) {
         // 更新检查组
         checkGroupDao.updateById(checkGroup);
@@ -138,6 +126,7 @@ public class CheckGroupService {
      * @param id
      * @return : void
      */
+    @Override
     public boolean deleteById(Integer id) {
         // 判断是否有检查项关联
         if (checkGroupDao.findCheckItemIdsByCheckGroupId(id).size() > 0) {
@@ -153,7 +142,26 @@ public class CheckGroupService {
      *
      * @return : java.util.List<com.itheima.health.model.pojos.CheckGroup>
      */
+    @Override
     public List<CheckGroup> findAll() {
         return checkGroupDao.selectList(null);
+    }
+
+    /**
+     * 功能描述: 将检查组与检查项建立联系
+     *
+     * @param checkGroupId
+     * @param checkitemIds
+     * @return : void
+     */
+    private void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkitemIds) {
+        if (checkitemIds != null && checkitemIds.length > 0) {
+            for (Integer checkitemId : checkitemIds) {
+                Map<String, Integer> map = new HashMap<>();
+                map.put(CHECKGROUP_ID, checkGroupId);
+                map.put(CHECKITEM_ID, checkitemId);
+                checkGroupDao.setCheckGroupAndCheckItem(map);
+            }
+        }
     }
 }

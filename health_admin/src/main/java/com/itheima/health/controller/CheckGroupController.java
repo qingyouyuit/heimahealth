@@ -5,8 +5,8 @@ import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.model.pojos.CheckGroup;
-import com.itheima.health.service.impl.CheckGroupService;
-import com.itheima.health.service.impl.SetmealService;
+import com.itheima.health.service.impl.CheckGroupServiceImpl;
+import com.itheima.health.service.impl.SetmealServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +24,9 @@ import java.util.List;
 @RequestMapping("/checkgroup")
 public class CheckGroupController {
     @Autowired
-    private CheckGroupService checkGroupService;
+    private CheckGroupServiceImpl checkGroupService;
     @Autowired
-    private SetmealService setmealService;
+    private SetmealServiceImpl setmealService;
 
     /**
      * 功能描述: 检查组列表

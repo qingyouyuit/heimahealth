@@ -3,6 +3,7 @@ package com.itheima.health.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.health.constant.MessageConstant;
 import com.itheima.health.mapper.CheckGroupDaoMapper;
 import com.itheima.health.mapper.CheckItemDaoMapper;
@@ -10,6 +11,7 @@ import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
+import com.itheima.health.service.CheckItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CheckItemService {
+public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckItem> implements CheckItemService {
 
     @Autowired
     private CheckItemDaoMapper checkItemDao;
@@ -33,6 +35,7 @@ public class CheckItemService {
      * @param pageParam
      * @return : com.itheima.health.common.ResultPageData
      */
+    @Override
     public ResultPageData findPage(PageParam pageParam) {
         Integer currentPage = pageParam.getCurrentPage();
         Integer pageSize = pageParam.getPageSize();
@@ -64,6 +67,7 @@ public class CheckItemService {
      * @param checkItemDto
      * @return : void
      */
+    @Override
     public void add(CheckItemDto checkItemDto) {
         CheckItem checkItem = new CheckItem();
         BeanUtils.copyProperties(checkItemDto, checkItem);
@@ -77,6 +81,7 @@ public class CheckItemService {
      * @param id
      * @return : void
      */
+    @Override
     public void delete(Integer id) {
         if (checkGroupDaoMapper.findCheckGroupIdsByCheckItemId(id).size() > 0) {
             throw new RuntimeException(MessageConstant.DELETE_CHECKITEM_FAIL);
@@ -90,6 +95,7 @@ public class CheckItemService {
      * @param id
      * @return : com.itheima.health.model.pojos.CheckItem
      */
+    @Override
     public CheckItem findById(Integer id) {
         return checkItemDao.selectById(id);
     }
@@ -100,6 +106,7 @@ public class CheckItemService {
      * @param checkItem
      * @return : void
      */
+    @Override
     public void updata(CheckItem checkItem) {
         checkItemDao.updateById(checkItem);
     }
@@ -109,6 +116,7 @@ public class CheckItemService {
      *
      * @return : java.util.List<com.itheima.health.model.pojos.CheckItem>
      */
+    @Override
     public List<CheckItem> findAll() {
         return checkItemDao.selectList(null);
     }

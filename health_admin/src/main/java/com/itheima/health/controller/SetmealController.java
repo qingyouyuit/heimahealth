@@ -5,9 +5,8 @@ import com.itheima.health.common.PageParam;
 import com.itheima.health.common.R;
 import com.itheima.health.common.ResultPageData;
 import com.itheima.health.constant.MessageConstant;
-import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.model.pojos.Setmeal;
-import com.itheima.health.service.impl.SetmealService;
+import com.itheima.health.service.impl.SetmealServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,7 @@ import java.util.List;
 @RequestMapping("/setmeal")
 public class SetmealController {
     @Autowired
-    private SetmealService setmealService;
+    private SetmealServiceImpl setmealService;
     @Autowired
     private FileStorageService fileStorageService;
 
