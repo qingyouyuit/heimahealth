@@ -13,7 +13,7 @@ import java.util.Map;
  * @Date: 2023/7/26 21:41
  */
 @Mapper
-public interface CheckGroupDaoMapper extends BaseMapper<CheckGroup> {
+public interface CheckGroupMapper extends BaseMapper<CheckGroup> {
     /**
      * 功能描述: 将检查组id与检查项id添加进中间表
      *

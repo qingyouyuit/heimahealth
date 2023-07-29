@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.health.constant.MessageConstant;
-import com.itheima.health.mapper.CheckGroupDaoMapper;
-import com.itheima.health.mapper.CheckItemDaoMapper;
+import com.itheima.health.mapper.CheckGroupMapper;
+import com.itheima.health.mapper.CheckItemMapper;
 import com.itheima.health.model.dtos.CheckItemDto;
 import com.itheima.health.model.pojos.CheckItem;
 import com.itheima.health.common.PageParam;
@@ -22,12 +22,12 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckItem> implements CheckItemService {
+public class CheckItemServiceImpl extends ServiceImpl<CheckItemMapper, CheckItem> implements CheckItemService {
 
     @Autowired
-    private CheckItemDaoMapper checkItemDao;
+    private CheckItemMapper checkItemMapper;
     @Autowired
-    private CheckGroupDaoMapper checkGroupDaoMapper;
+    private CheckGroupMapper checkGroupMapper;
 
     /**
      * 功能描述: 检查项目列表
@@ -51,7 +51,7 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
             }
         }
 
-        IPage<CheckItem> pageData = checkItemDao.selectPage(page, query);
+        IPage<CheckItem> pageData = checkItemMapper.selectPage(page, query);
         long total = pageData.getTotal();
         List<CheckItem> records = pageData.getRecords();
 
@@ -72,7 +72,7 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
         CheckItem checkItem = new CheckItem();
         BeanUtils.copyProperties(checkItemDto, checkItem);
         log.info("checkItem:{}", checkItem);
-        checkItemDao.insert(checkItem);
+        checkItemMapper.insert(checkItem);
     }
 
     /**
@@ -83,10 +83,10 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
      */
     @Override
     public void delete(Integer id) {
-        if (checkGroupDaoMapper.findCheckGroupIdsByCheckItemId(id).size() > 0) {
+        if (checkGroupMapper.findCheckGroupIdsByCheckItemId(id).size() > 0) {
             throw new RuntimeException(MessageConstant.DELETE_CHECKITEM_FAIL);
         }
-        checkItemDao.deleteById(id);
+        checkItemMapper.deleteById(id);
     }
 
     /**
@@ -97,7 +97,7 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
      */
     @Override
     public CheckItem findById(Integer id) {
-        return checkItemDao.selectById(id);
+        return checkItemMapper.selectById(id);
     }
 
     /**
@@ -108,7 +108,7 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
      */
     @Override
     public void updata(CheckItem checkItem) {
-        checkItemDao.updateById(checkItem);
+        checkItemMapper.updateById(checkItem);
     }
 
     /**
@@ -118,7 +118,7 @@ public class CheckItemServiceImpl extends ServiceImpl<CheckItemDaoMapper, CheckI
      */
     @Override
     public List<CheckItem> findAll() {
-        return checkItemDao.selectList(null);
+        return checkItemMapper.selectList(null);
     }
 
 }

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.health.common.PageParam;
 import com.itheima.health.common.ResultPageData;
-import com.itheima.health.mapper.CheckGroupDaoMapper;
+import com.itheima.health.mapper.CheckGroupMapper;
 import com.itheima.health.model.pojos.CheckGroup;
 import com.itheima.health.service.CheckGroupService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,11 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, CheckGroup> implements CheckGroupService {
+public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupMapper, CheckGroup> implements CheckGroupService {
     public static final String CHECKGROUP_ID = "checkgroup_id";
     public static final String CHECKITEM_ID = "checkitem_id";
     @Autowired
-    private CheckGroupDaoMapper checkGroupDao;
+    private CheckGroupMapper checkGroupMapper;
 
     /**
      * 功能描述: 检查组列表
@@ -58,7 +58,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
             }
         }
 
-        IPage<CheckGroup> pageData = checkGroupDao.selectPage(page, query);
+        IPage<CheckGroup> pageData = checkGroupMapper.selectPage(page, query);
         long total = pageData.getTotal();
         List<CheckGroup> records = pageData.getRecords();
 
@@ -78,7 +78,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
     @Override
     public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
         // 添加并返回主键
-        checkGroupDao.insert(checkGroup);
+        checkGroupMapper.insert(checkGroup);
         setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
     }
     /**
@@ -89,7 +89,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
      */
     @Override
     public CheckGroup findById(Integer id) {
-        return checkGroupDao.selectById(id);
+        return checkGroupMapper.selectById(id);
     }
 
     /**
@@ -100,7 +100,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
      */
     @Override
     public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
-        return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
+        return checkGroupMapper.findCheckItemIdsByCheckGroupId(id);
     }
 
     /**
@@ -113,9 +113,9 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
     @Override
     public void updata(CheckGroup checkGroup, Integer[] checkitemIds) {
         // 更新检查组
-        checkGroupDao.updateById(checkGroup);
+        checkGroupMapper.updateById(checkGroup);
         // 删除检查组对应的检查项
-        checkGroupDao.deleteCheckGroupAndCheckItemByCheckGroupId(checkGroup.getId());
+        checkGroupMapper.deleteCheckGroupAndCheckItemByCheckGroupId(checkGroup.getId());
         // 添加检查组对应的检查项
         setCheckGroupAndCheckItem(checkGroup.getId(), checkitemIds);
     }
@@ -129,11 +129,11 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
     @Override
     public boolean deleteById(Integer id) {
         // 判断是否有检查项关联
-        if (checkGroupDao.findCheckItemIdsByCheckGroupId(id).size() > 0) {
+        if (checkGroupMapper.findCheckItemIdsByCheckGroupId(id).size() > 0) {
             return false;
         }
         // 删除检查组
-        checkGroupDao.deleteById(id);
+        checkGroupMapper.deleteById(id);
         return true;
     }
 
@@ -144,7 +144,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
      */
     @Override
     public List<CheckGroup> findAll() {
-        return checkGroupDao.selectList(null);
+        return checkGroupMapper.selectList(null);
     }
 
     /**
@@ -160,7 +160,7 @@ public class CheckGroupServiceImpl extends ServiceImpl<CheckGroupDaoMapper, Chec
                 Map<String, Integer> map = new HashMap<>();
                 map.put(CHECKGROUP_ID, checkGroupId);
                 map.put(CHECKITEM_ID, checkitemId);
-                checkGroupDao.setCheckGroupAndCheckItem(map);
+                checkGroupMapper.setCheckGroupAndCheckItem(map);
             }
         }
     }

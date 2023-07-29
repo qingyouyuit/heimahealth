@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.itheima.health.mapper.CheckGroupDaoMapper">
+<mapper namespace="com.itheima.health.mapper.CheckGroupMapper">
 
     <!-- 设置检查组和检查项的关联关系 -->
     <insert id="setCheckGroupAndCheckItem" parameterType="hashmap">

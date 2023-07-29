@@ -5,6 +5,6 @@ import com.itheima.health.model.pojos.CheckItem;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface CheckItemDaoMapper extends BaseMapper<CheckItem> {
+public interface CheckItemMapper extends BaseMapper<CheckItem> {
 
 }
