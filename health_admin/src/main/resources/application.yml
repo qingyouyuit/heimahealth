@@ -28,5 +28,5 @@ minio:
   accessKey: minio
   secretKey: minio123
   bucket: health
-  endpoint: http://192.168.200.131:9000
-  readPath: http://192.168.200.131:9000
+  endpoint: http://192.168.150.107:9000
+  readPath: http://192.168.150.107:9000
