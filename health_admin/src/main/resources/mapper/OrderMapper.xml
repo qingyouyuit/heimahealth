@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.health.mapper.OrderMapper">
+
+    <select id="getSetmealReportCount" resultType="java.util.HashMap">
+        select count(torder.id) 'count', tsetmeal.name 'name'
+        from t_order torder,
+             t_setmeal tsetmeal
+        where torder.setmeal_id = tsetmeal.id
+        group by torder.setmeal_id;
+    </select>
+</mapper>

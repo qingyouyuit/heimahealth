@@ -2,8 +2,10 @@ package com.itheima.health.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.itheima.health.mapper.MemberMapper;
+import com.itheima.health.mapper.OrderMapper;
 import com.itheima.health.model.pojos.Member;
 import com.itheima.health.model.vos.MemberCountListVO;
+import com.itheima.health.model.vos.SetmealReportVO;
 import com.itheima.health.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ import java.util.List;
 public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
     /**
      * 功能描述: 查询会员数量
@@ -48,5 +53,30 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         memberCountListVO.setMemberCount(memberCounts);
         // 9.返回
         return memberCountListVO;
+    }
+
+    /**
+     * 功能描述: 查询套餐数量
+     *
+     * @return : com.itheima.health.model.vos.MemberCountListVO
+     */
+    @Override
+    public SetmealReportVO getSetmealReportCount() {
+        List<HashMap<String, Object>> memberCount = orderMapper.getSetmealReportCount();
+        SetmealReportVO setmealReportVO = new SetmealReportVO();
+        List<String> setmealNames = new ArrayList<>();
+        List<HashMap<String, Object>> setmealCounts = new ArrayList<>();
+        for (HashMap<String, Object> map : memberCount) {
+            String setmealName = map.get("name").toString();
+            String setmealCount = map.get("count").toString();
+            HashMap<String, Object> setmealCountMap = new HashMap<>();
+            setmealCountMap.put("name", setmealName);
+            setmealCountMap.put("value", Integer.valueOf(setmealCount));
+            setmealCounts.add(setmealCountMap);
+            setmealNames.add(setmealName);
+        }
+        setmealReportVO.setSetmealNames(setmealNames);
+        setmealReportVO.setSetmealCount(setmealCounts);
+        return setmealReportVO;
     }
 }
